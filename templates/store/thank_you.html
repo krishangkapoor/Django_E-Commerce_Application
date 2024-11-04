@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Thank You
+{% endblock %}
+
+{% block content %}
+    <h1>Thank You for Shopping with Us!</h1>
+    <p>Your payment has been submitted successfully.</p>
+    
+    <p>To continue browsing our store, <a href="{% url 'product_list' %}">click here</a>.</p>
+{% endblock %}

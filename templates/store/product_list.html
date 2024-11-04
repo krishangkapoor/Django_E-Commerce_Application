@@ -1,0 +1,59 @@
+{% extends 'base.html' %}  
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}
+    Product List
+{% endblock %}
+
+{% block content %}
+    <h1>Product List</h1>
+
+    <div class="product-list">
+        <form method="GET" action="{% url 'product_list' %}">
+            <input type="text" name="q" placeholder="Search for products..." value="{{ request.GET.q }}">
+            <button type="submit">Search</button>
+        </form>
+
+        {% for product in products %}
+        <div class="product-item">
+            <h2>{{ product.name }}</h2>
+
+            <div class="carousel-container">
+                <div class="carousel">
+                    {% for image in product.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ product.name }}" class="carousel-image">
+                    {% empty %}
+                        <p>No images available.</p>
+                    {% endfor %}
+                </div>
+            
+                <div class="carousel-arrow left-arrow" onclick="moveSlide(this, -1)">❮</div>
+                <div class="carousel-arrow right-arrow" onclick="moveSlide(this, 1)">❯</div>
+            </div>
+
+            <p>{{ product.description }}</p>
+            <p>Price: ${{ product.price }}</p>
+
+            <form action="{% url 'add_to_cart' product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+
+            <form action="{% url 'buy_now' product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Buy Now</button>
+            </form>
+
+            {% if user.is_authenticated and user|in_roles:"Moderator,Admin,Superadmin" %}
+            <div class="admin-options">
+                <a href="{% url 'product_update' product.id %}" class="btn btn-secondary">Edit</a>
+                <a href="{% url 'product_delete' product.id %}" class="btn btn-danger">Delete</a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}

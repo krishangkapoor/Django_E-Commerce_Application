@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="checkout-page">
+    <h2>Checkout</h2>
+    <p>Total: ${{ total_price }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <!-- Include fields for payment and shipping details -->
+        <a href="{% url 'payment_form' %}">Proceed to Payment</a>
+        <button type="submit">Confirm Purchase</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<h2>Your Shopping Cart</h2>
+<ul class="cart-list">
+    {% for item in cart %}
+    <li>
+        <div class="cart-item">
+            <h3>{{ item.product.name }} (x{{ item.quantity }})</h3>
+            <p class="price">${{ item.total_price }}</p>
+            <a href="{% url 'remove_from_cart' item.product.id %}" class="btn">Remove</a>
+            <a href="{% url 'buy_now' item.product.id %}" class="btn">Buy Now</a> 
+        </div>
+    </li>
+    {% empty %}
+    <li>Your cart is empty.</li>
+    {% endfor %}
+</ul>
+
+<h3>Total: ${{ total_price }}</h3>
+
+<a href="{% url 'buy_all' %}" class="btn">Buy All</a> 
+<a href="{% url 'product_list' %}" class="btn">Continue Shopping</a>
+{% endblock %}

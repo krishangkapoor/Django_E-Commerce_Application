@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Add/Edit Product{% endblock %}
+
+{% block content %}
+<h2>{% if product %}Edit Product{% else %}Add New Product{% endif %}</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h3>Upload New Images:</h3>
+    <input type="file" name="image" multiple>
+
+    <h3>Existing Images:</h3>
+    <ul>
+        {% for img in existing_images %}
+            <li>
+                <img src="{{ img.image.url }}" alt="Product Image" class="product-image">
+                <a href="{% url 'delete_product_image' img.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <button type="submit">Save Product</button>
+</form>
+
+{% endblock %}

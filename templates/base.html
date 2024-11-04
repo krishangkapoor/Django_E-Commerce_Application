@@ -1,0 +1,46 @@
+{% load custom_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}  
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>{% block title %}My Store{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.webp' %}" alt="My Store Logo" style="width: 50px; height: auto;">
+                </a>
+            </h1>
+            <nav>
+                <ul style="font-size: 16px;">
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'product_list' %}">Products</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Cart</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% if user.is_authenticated and user|in_roles:"Admin,Superadmin" %}
+                    <li><a href="{% url 'user_list' %}">User List</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 My Store. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
