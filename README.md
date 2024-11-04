@@ -12,11 +12,9 @@ Shopping cart functionality with email notifications.
 
 Password reset functionality with secure email-based password reset links.
 
-Admin and moderator roles for user and product management.
+Super admin, Admin, and moderator roles for user and product management.
 
 Prerequisites
-
-Ensure you have the following installed on your system:
 
 Docker
 
