@@ -1,8 +1,8 @@
-Summary
+Summary:
 
 This project is a comprehensive e-commerce web application built with Django. It features user authentication, product management, a shopping cart, and email notifications for user interactions such as adding items to the cart and completing purchases. The application is designed to be deployed and run using Docker for a seamless setup process.
 
-Features
+Features:
 
 User registration and login with email verification.
 
@@ -19,3 +19,7 @@ Prerequisites
 Ensure you have the following installed on your system:
 
 Docker
+
+Step-by-Step Guide to Download and Run the Application:
+
+
